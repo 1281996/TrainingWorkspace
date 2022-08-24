@@ -1,8 +1,8 @@
 package com.cog.controller;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import javax.validation.Valid;
 
@@ -10,9 +10,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,7 @@ import com.cog.service.UserService;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 	
 	Log LOGGER =LogFactory.getLog(UserController.class);
 	@Autowired
@@ -49,22 +50,14 @@ public class UserController {
 	//user path variable checking
 		@PostMapping("/age/{age}/height/{height}")
 		@ResponseStatus(code = HttpStatus.CREATED)
-		User saveUser(@Valid @RequestBody User user,@PathVariable("age") int age,@PathVariable("height") float height ){
+		ResponseEntity saveUser(@Valid @RequestBody User user,@PathVariable("age") int age,@PathVariable("height") float height ){
 			LOGGER.trace(user);
-			System.out.println(age+"-"+height);
-			return null;
+			LOGGER.trace(age+"-"+height);
+			MultiValueMap<String, String> headers=new LinkedMultiValueMap<>();
+			headers.add("sample", "sample1");
+			ResponseEntity res =new ResponseEntity(headers, HttpStatus.CONFLICT);
+			return res;
 			
 		}
-		//Error handling
-		@ExceptionHandler(MethodArgumentNotValidException.class)
-		Map<String,String> handleException(MethodArgumentNotValidException ex) {
-			Map<String,String> errors=new HashMap<>();
-			ex.getBindingResult().getAllErrors().forEach(err->{
-				String filedError=	((FieldError) err).getField();
-				String msg=	((FieldError) err).getDefaultMessage();
-			
-			errors.put(filedError, msg);
-			});
-			return errors;
-		}
+		
 }
