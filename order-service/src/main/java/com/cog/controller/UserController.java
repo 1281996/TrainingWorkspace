@@ -1,8 +1,6 @@
 package com.cog.controller;
 
-
 import java.util.List;
-
 
 import javax.validation.Valid;
 
@@ -25,39 +23,41 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cog.entity.User;
 import com.cog.service.UserService;
 
-
-
 @RestController
 @RequestMapping("/user")
-public class UserController extends BaseController{
-	
-	Log LOGGER =LogFactory.getLog(UserController.class);
+public class UserController extends BaseController {
+
+	Log LOGGER = LogFactory.getLog(UserController.class);
 	@Autowired
 	UserService userService;
-	//get all registered userss
+
+	// get all registered userss
 	@GetMapping
-	List<User> getAllUsers(){
+	List<User> getAllUsers() {
 		return userService.findAllUsers();
-		
+
 	}
-	//user registration
+
+	// user registration
 	@PostMapping
-	User saveUser(@RequestBody User user){
+	Integer saveUser(@RequestBody User user) {
 		LOGGER.trace(user);
-		return userService.registerUser(user);
-		
+		return userService.registerUser(user).getId();
+
 	}
-	//user path variable checking
-		@PostMapping("/age/{age}/height/{height}")
-		@ResponseStatus(code = HttpStatus.CREATED)
-		ResponseEntity saveUser(@Valid @RequestBody User user,@PathVariable("age") int age,@PathVariable("height") float height ){
-			LOGGER.trace(user);
-			LOGGER.trace(age+"-"+height);
-			MultiValueMap<String, String> headers=new LinkedMultiValueMap<>();
-			headers.add("sample", "sample1");
-			ResponseEntity res =new ResponseEntity(headers, HttpStatus.CONFLICT);
-			return res;
-			
-		}
-		
+
+	// user path variable checking
+	@PostMapping("/age/{age}/height/{height}")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	ResponseEntity saveUser(@Valid @RequestBody User user, @PathVariable("age") int age,
+			@PathVariable("height") float height) {
+		LOGGER.trace(user);
+		LOGGER.trace(age + "-" + height);
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		headers.add("sample", "sample1");
+		ResponseEntity res = new ResponseEntity(headers, HttpStatus.CONFLICT);
+		return res;
+
+	}
+
 }

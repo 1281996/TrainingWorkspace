@@ -5,8 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+
 
 @Entity
 public class User {
@@ -18,6 +20,7 @@ public class User {
 	String name;
 	@Min(value = 1,message = "age canot be less than zero")
 	Integer age;
+	
 	Double sal;
 	public User() {
 		

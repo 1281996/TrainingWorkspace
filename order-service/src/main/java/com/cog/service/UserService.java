@@ -8,22 +8,19 @@ import org.springframework.stereotype.Service;
 import com.cog.entity.User;
 import com.cog.repo.UserRepostority;
 
-
-
 @Service
 public class UserService {
 	@Autowired
 	UserRepostority userRepo;
 
 	public List<User> findAllUsers() {
-		
+
 		return userRepo.findAll();
 	}
 
 	public User registerUser(User user) {
-		
+
 		return userRepo.save(user);
 	}
 
 }
-
