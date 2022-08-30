@@ -1,4 +1,37 @@
-<p>userform works!</p>
-<input [(ngModel)]='user.name'>{{user.name}}
-<input [(ngModel)]='user.age'>
-<button (click)='saveUser()'>Save</button>
+
+
+
+
+
+<div class="container-fluid">
+    <h2>Register</h2>
+    <form [formGroup]="frmRegister">
+        <dl>
+            <dt>User Name</dt>
+            <dd><input  [(ngModel)]='user.name' formControlName="Name" name="UserName" type="text"></dd>
+            <dd class="text-danger" *ngIf="Name.touched && Name.invalid">
+                <span *ngIf="Name.errors?.['required']">Name Required</span>
+                <span *ngIf="Name.errors?.['minlength']">Name too Short..</span>
+            </dd>
+            
+            <dt>Age</dt>
+            <dd><input [(ngModel)]='user.age'  formControlName="Age"name="Age"  type="number"></dd>
+            <dd class="text-danger" *ngIf="Age.touched && Age.invalid">
+                <span *ngIf="Age.errors?.['required']">Age Required</span>
+                <span *ngIf="Age.errors?.['pattern']">Age Invalid</span>
+            </dd>
+        </dl>
+        <button   (click)='saveUser()'>Register</button>
+        <button   (click)='saveUserWithPathVar()'>SavePath</button>
+  </form>
+    <hr>
+    <h2>Details</h2>
+    User Name :  {{user.name}}
+    <br>
+    Age:  {{user.age}}
+    
+</div>
+<h2>user list</h2>
+<ol> 
+    <li *ngFor="let usera of users">{{usera.name}},{{usera.age}}</li>
+</ol>

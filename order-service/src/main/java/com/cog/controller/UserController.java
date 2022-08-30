@@ -41,9 +41,9 @@ public class UserController extends BaseController {
 
 	// user registration
 	@PostMapping
-	Integer saveUser(@RequestBody User user) {
+	User saveUser(@RequestBody User user) {
 		LOGGER.trace(user);
-		return userService.registerUser(user).getId();
+		return userService.registerUser(user);
 
 	}
 
@@ -56,7 +56,8 @@ public class UserController extends BaseController {
 		LOGGER.trace(age + "-" + height);
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		headers.add("sample", "sample1");
-		ResponseEntity res = new ResponseEntity(headers, HttpStatus.CONFLICT);
+		ResponseEntity res = new ResponseEntity(user,headers, HttpStatus.ACCEPTED);
+		
 		return res;
 
 	}

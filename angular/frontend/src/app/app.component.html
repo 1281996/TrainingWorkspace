@@ -1,1 +1,27 @@
-<userform></userform>
+
+
+
+<div class="container-fluid">
+    <header class="d-flex justify-content-between bg-dark text-white p-2">
+       <div>
+          <span class="brand">Shopper.</span>
+       </div>
+       <div class="menu">
+         <a routerLink="login">Login</a>
+         <a routerLink="home">Home</a>
+         <a routerLink="userlist">UserList</a>
+       </div>
+       <div class="icons">
+          <span class="bi bi-search"></span> 
+          <span class="bi bi-heart"></span>
+          <span class="bi bi-person"></span>
+          <span class="bi bi-cart2"></span>
+       </div>
+    </header>
+    <div class="mt-1">
+      <img src="assets/slide3.png" class="w-100 d-block">
+    </div>
+    <section class="mt-2">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
