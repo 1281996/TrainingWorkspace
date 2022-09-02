@@ -1,1 +1,5 @@
-<p>userlist works!</p>
+<ol *ngFor="let user of data">
+    <li>{{user.name}},{{user.age}},{{user.dob | date}}  <button type="button
+        " (click)="delteUser(user)" class="btn btn-danger">Delete</button></li>
+    
+    </ol>

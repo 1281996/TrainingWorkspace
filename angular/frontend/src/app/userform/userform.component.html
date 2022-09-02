@@ -20,8 +20,10 @@
                 <span *ngIf="Age.errors?.['required']">Age Required</span>
                 <span *ngIf="Age.errors?.['pattern']">Age Invalid</span>
             </dd>
+            <dt>Date</dt>
+            <dd><input type="date" placeholder="dob" [(ngModel)]='user.dob' formControlName="DOB"name="DOB"></dd>
         </dl>
-        <button   (click)='saveUser()'>Register</button>
+        <button  type="button" class="btn btn-success" (click)='saveUser()'>Register</button>
         <button   (click)='saveUserWithPathVar()'>SavePath</button>
   </form>
     <hr>
@@ -34,4 +36,8 @@
 <h2>user list</h2>
 <ol> 
     <li *ngFor="let usera of users">{{usera.name}},{{usera.age}}</li>
+</ol>
+<ol *ngFor="let user of data">
+<li>{{user.name}},{{user.age}}</li>
+
 </ol>

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,10 +57,16 @@ public class UserController extends BaseController {
 		LOGGER.trace(age + "-" + height);
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		headers.add("sample", "sample1");
-		ResponseEntity res = new ResponseEntity(user,headers, HttpStatus.ACCEPTED);
-		
+		ResponseEntity res = new ResponseEntity(user, headers, HttpStatus.ACCEPTED);
+
 		return res;
 
 	}
-
+//delete user
+	@DeleteMapping("/{id}")
+	ResponseEntity deleteUser(@PathVariable("id") Integer id) {
+		userService.deleteUser(id);
+		ResponseEntity res = new ResponseEntity(getAllUsers(), HttpStatus.ACCEPTED);
+		return res;
+	}
 }
